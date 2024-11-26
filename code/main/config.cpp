@@ -12,12 +12,13 @@ int distance2 = 0;
 int pinMoteur1_reculer = 6;
 int pinMoteur1_avancer = 5;
 //----------------------------
-int pinMoteur2_reculer = 4;
-int pinMoteur2_avancer = 3;
+int pinMoteur2_avancer = 4;
+int pinMoteur2_reculer = 3;
 //=======================================
 
-bool ultrason1_detecte = false;
-bool ultrason2_detecte = false;
+/*bool ultrason1_detecte = false;
+bool ultrason2_detecte = false;*/
+bool obstacle_passed = false;
 
 int avancer(int time){
 
@@ -35,46 +36,45 @@ int avancer(int time){
 
 }
 
-int tournergauche(int time){
+int tournerdroite(int time){
 
-  digitalWrite(pinMoteur1_avancer, LOW);
-  digitalWrite(pinMoteur2_avancer, HIGH);
-  digitalWrite(pinMoteur1_reculer, HIGH);
+  digitalWrite(pinMoteur1_avancer, HIGH);
+  digitalWrite(pinMoteur1_reculer, LOW);
+  digitalWrite(pinMoteur2_avancer, LOW);
   digitalWrite(pinMoteur2_reculer, LOW);
 
   delay(time);
 
   digitalWrite(pinMoteur1_avancer, LOW);
-  digitalWrite(pinMoteur2_avancer, LOW);
   digitalWrite(pinMoteur1_reculer, LOW);
+  digitalWrite(pinMoteur2_avancer, LOW);
   digitalWrite(pinMoteur2_reculer, LOW);
 
 }
 
-int tournerdroite(int time){
-
-  digitalWrite(pinMoteur1_avancer, HIGH);
-  digitalWrite(pinMoteur2_avancer, LOW);
+int tournergauche(int time){
+  digitalWrite(pinMoteur1_avancer, LOW);
   digitalWrite(pinMoteur1_reculer, LOW);
-  digitalWrite(pinMoteur2_reculer, HIGH);
+  digitalWrite(pinMoteur2_avancer, HIGH);
+  digitalWrite(pinMoteur2_reculer, LOW);
 
   delay(time);
 
   digitalWrite(pinMoteur1_avancer, LOW);
-  digitalWrite(pinMoteur2_avancer, LOW);
   digitalWrite(pinMoteur1_reculer, LOW);
+  digitalWrite(pinMoteur2_avancer, LOW);
   digitalWrite(pinMoteur2_reculer, LOW);
 
 }
 
 void eviter(){
-    tournergauche(300);
-    avancer(700);
-    tournerdroite(300);
-    avancer(700);
-    tournerdroite(300);
-    avancer(700);
-    tournergauche(300);
+    tournergauche(1000);
+    avancer(500);
+    tournerdroite(1000);
+    avancer(500);
+    tournerdroite(1000);
+    avancer(600);
+    tournergauche(1100);
 }
 
 void slalom(){
@@ -83,27 +83,27 @@ void slalom(){
   Serial.println(distance1);
   Serial.println("===================");
 
-  if(distance1<=35){
+  /*if(distance1<=40){
     ultrason1_detecte = true;
   }else{
     ultrason1_detecte = false;
-  }
+  }*/
 
   //------------------------------------------------------
   distance2 = ultrasonic2.read(CM);
   Serial.println(distance2);
   Serial.println("===================");
 
-  if(distance2<=35){
+ /* if(distance2<=40){
     ultrason2_detecte = true;
   }else{
     ultrason2_detecte = false;
-  }
+  }*/
   //------------------------------------------------------
 
   //======================================================
 
-  if(ultrason1_detecte || ultrason2_detecte){
+  if(distance1<=40 || distance2<=40){
     eviter();
   }else{
     avancer(50);
@@ -117,14 +117,14 @@ void testultrason(){
   Serial.println(distance2);
   Serial.println("======================");
 
-  delay(200);
+  delay(500);
   
 }
 
 void testmouvement(){
-  Serial.print("STARTING............");
-  digitalWrite(5, HIGH);
+
 }
+
 
 
 

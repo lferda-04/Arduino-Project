@@ -27,6 +27,7 @@ extern void testultrason();
 extern void testmouvement();
 
 
+extern void slalom2();
 
 
 
