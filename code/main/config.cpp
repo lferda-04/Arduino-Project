@@ -2,8 +2,8 @@
 #include "Arduino.h"
 #include "Ultrasonic.h"
 
-Ultrasonic ultrasonic1(8, 9);
-Ultrasonic ultrasonic2(10, 11);
+Ultrasonic ultrasonic1(7, 8);
+Ultrasonic ultrasonic2(12, 13);
 
 int distance1 = 0;
 int distance2 = 0;
@@ -14,6 +14,9 @@ int pinMoteur1_avancer = 5;
 //----------------------------
 int pinMoteur2_avancer = 4;
 int pinMoteur2_reculer = 3;
+
+int pwm1 = 9;
+int pwm2 = 10;
 //=======================================
 
 /*bool ultrason1_detecte = false;
@@ -23,7 +26,9 @@ bool obstacle_passed = false;
 int avancer(int time){
 
   digitalWrite(pinMoteur1_avancer, HIGH);
+  analogWrite(pwm1, 200);
   digitalWrite(pinMoteur2_avancer, HIGH);
+  analogWrite(pwm2, 200);
   digitalWrite(pinMoteur1_reculer, LOW);
   digitalWrite(pinMoteur2_reculer, LOW);
 
@@ -39,6 +44,7 @@ int avancer(int time){
 int tournerdroite(int time){
 
   digitalWrite(pinMoteur1_avancer, HIGH);
+  analogWrite(pwm1, 200);
   digitalWrite(pinMoteur1_reculer, LOW);
   digitalWrite(pinMoteur2_avancer, LOW);
   digitalWrite(pinMoteur2_reculer, LOW);
@@ -56,6 +62,7 @@ int tournergauche(int time){
   digitalWrite(pinMoteur1_avancer, LOW);
   digitalWrite(pinMoteur1_reculer, LOW);
   digitalWrite(pinMoteur2_avancer, HIGH);
+  analogWrite(pwm2, 200);
   digitalWrite(pinMoteur2_reculer, LOW);
 
   delay(time);

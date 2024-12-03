@@ -12,6 +12,10 @@ extern int pinMoteur1_reculer;
 //----------------------------
 extern int pinMoteur2_avancer;
 extern int pinMoteur2_reculer;
+
+
+extern int pwm1;
+extern int pwm2;
 //========================================
 extern bool ulrason1_detecte;
 extern bool ultrason2_detecte;
