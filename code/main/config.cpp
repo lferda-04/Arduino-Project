@@ -26,9 +26,8 @@ bool obstacle_passed = false;
 int avancer(int time){
 
   digitalWrite(pinMoteur1_avancer, HIGH);
-  analogWrite(pwm1, 200);
+
   digitalWrite(pinMoteur2_avancer, HIGH);
-  analogWrite(pwm2, 200);
   digitalWrite(pinMoteur1_reculer, LOW);
   digitalWrite(pinMoteur2_reculer, LOW);
 
@@ -44,10 +43,13 @@ int avancer(int time){
 int tournerdroite(int time){
 
   digitalWrite(pinMoteur1_avancer, HIGH);
-  analogWrite(pwm1, 200);
+  //analogWrite(pwm1, 200);
   digitalWrite(pinMoteur1_reculer, LOW);
   digitalWrite(pinMoteur2_avancer, LOW);
-  digitalWrite(pinMoteur2_reculer, LOW);
+  digitalWrite(pinMoteur2_reculer, HIGH);
+  //analogWrite(pwm1, 150);
+  //analogWrite(pwm2, 150);
+
 
   delay(time);
 
@@ -60,10 +62,12 @@ int tournerdroite(int time){
 
 int tournergauche(int time){
   digitalWrite(pinMoteur1_avancer, LOW);
-  digitalWrite(pinMoteur1_reculer, LOW);
+  digitalWrite(pinMoteur1_reculer, HIGH);
   digitalWrite(pinMoteur2_avancer, HIGH);
-  analogWrite(pwm2, 200);
+  //analogWrite(pwm2, 200);
   digitalWrite(pinMoteur2_reculer, LOW);
+  //analogWrite(pwm1, 150);
+  //analogWrite(pwm2, 150);
 
   delay(time);
 
@@ -85,47 +89,26 @@ void eviter(){
 }
 
 void slalom(){
-  //======= Get distance from ultrason1
+  //get distances
   distance1 = ultrasonic1.read(CM);
-  Serial.println(distance1);
-  Serial.println("===================");
-
-  /*if(distance1<=40){
-    ultrason1_detecte = true;
-  }else{
-    ultrason1_detecte = false;
-  }*/
-
-  //------------------------------------------------------
   distance2 = ultrasonic2.read(CM);
-  Serial.println(distance2);
-  Serial.println("===================");
 
- /* if(distance2<=40){
-    ultrason2_detecte = true;
+  //conditions
+  if(distance1<40){
+    avancer(500);
+    tournergauche(600);
+    avancer(1000);
+  }else if(distance2<40){
+    avancer(500);
+    tournerdroite(600);
+    avancer(1000);
   }else{
-    ultrason2_detecte = false;
-  }*/
-  //------------------------------------------------------
-
-  //======================================================
-
-  if(distance1<=40 || distance2<=40){
-    eviter();
-  }else{
-    avancer(50);
+    avancer(100);
   }
-
-}
-void testultrason(){
-  distance1 = ultrasonic1.read(CM);
-  distance2 = ultrasonic2.read(CM);
-  Serial.println(distance1);
-  Serial.println(distance2);
-  Serial.println("======================");
-
-  delay(500);
   
+
+
+
 }
 
 void testmouvement(){
