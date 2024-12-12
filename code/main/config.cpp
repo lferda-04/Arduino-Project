@@ -2,14 +2,16 @@
 #include "Arduino.h"
 #include "Ultrasonic.h"
 
-Ultrasonic ultrasonic1(7, 8);
-Ultrasonic ultrasonic2(12, 13);
+Ultrasonic ultrasonic1(6, 7);
+Ultrasonic ultrasonic2(8, 9);
+//=================================================
+
 
 int distance1 = 0;
 int distance2 = 0;
 //=======================================
 
-int pinMoteur1_reculer = 6;
+int pinMoteur1_reculer = 4;
 int pinMoteur1_avancer = 5;
 //----------------------------
 int pinMoteur2_avancer = 4;
@@ -111,9 +113,7 @@ void slalom(){
 
 }
 
-void testmouvement(){
 
-}
 
 
 

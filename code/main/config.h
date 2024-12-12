@@ -19,6 +19,8 @@ extern int pwm2;
 //========================================
 extern bool ulrason1_detecte;
 extern bool ultrason2_detecte;
+//===========================================
+
 
 
 //========================================
@@ -30,8 +32,6 @@ extern void eviter();
 extern void testultrason();
 extern void testmouvement();
 
-
-extern void slalom2();
 
 
 
