@@ -4,14 +4,22 @@
 
 Servo servo;
 
+int bouton = 13;
+int etatBouton = 0;
+
+
+
 
 void declencher(){
-  delay(1000);
-
-  servo.write(100);
-  
-
+etatBouton=digitalRead(bouton); 
+  if(etatBouton==HIGH){
+    servo.write(90);
+    delay(5000);
+    servo.write(0);
+    delay(1500);
+  }
 }
+
 
 
 void setup(){
@@ -19,9 +27,9 @@ void setup(){
   pinMode(pinMoteur1_reculer, OUTPUT);
   pinMode(pinMoteur2_avancer, OUTPUT);
   pinMode(pinMoteur2_reculer, OUTPUT);
-
-  servo.attach(11);
-
+   
+  pinMode(bouton, INPUT);
+  servo.attach(10);
   Serial.begin(9600);
 }
 
